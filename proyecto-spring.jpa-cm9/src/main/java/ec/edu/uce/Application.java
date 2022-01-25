@@ -88,6 +88,10 @@ public class Application implements CommandLineRunner{
 		//System.out.println(gApellido);
 		
 		//busca con named query
+		//Guardia gApellido =this.guardService.buscarGuardiaApellidoNamedService("Alvarado");
+		//LOG.info("El guardia ha sido: "+gApellido);
+		
+		//busca con native query
 		Guardia gApellido =this.guardService.buscarGuardiaApellidoNamedService("Alvarado");
 		LOG.info("El guardia ha sido: "+gApellido);
 	}
