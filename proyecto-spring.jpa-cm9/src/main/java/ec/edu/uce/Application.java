@@ -66,7 +66,7 @@ public class Application implements CommandLineRunner{
 		guard2.setId(3);
 		guard2.setNombre("Ricardo");
 		guard2.setApellido("Montalvo");
-		guard2.setEdificio("Plaza Toross");
+		guard2.setEdificio("Plaza Toros");
 		
 		//this.guardService.InsertarGuardiaService(guard);
 		//System.out.println(this.guardService.buscarGuardiaApellidoService("Montalvo"));
