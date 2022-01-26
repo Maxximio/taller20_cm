@@ -7,6 +7,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
@@ -61,7 +65,6 @@ public class GuardiaRepoImpl implements IGuardiaRepo{
 	}catch(NoResultException e) {
 		LOG.error("No existe un resultado para: "+apellido,e);
 	}	
-		
 		return g;
 	}
 	
@@ -78,8 +81,6 @@ public class GuardiaRepoImpl implements IGuardiaRepo{
 		 }
 		return null;
 	}
-
-	
 	
 	@Override
 	public Guardia buscarGuardiaApellidoIype(String apellido) {
@@ -105,6 +106,79 @@ public class GuardiaRepoImpl implements IGuardiaRepo{
 		miQuery.setParameter("valor", apellido);
 		return (Guardia) miQuery.getSingleResult();
 	}
+
+	@Override
+	public Guardia buscarGuardiaApellidoNamedNative(String apellido) {
+		Query miQuery=this.entityManager.createNamedQuery("Guardia.buscarPorApellidoNative",Guardia.class);
+		miQuery.setParameter("valor", apellido);
+		return (Guardia)miQuery.getSingleResult();
+	}
+
+	@Override
+	public Guardia buscarGuardiaApellidoCriteria(String apellido) {
+		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Guardia> myQuery=myCriteria.createQuery(Guardia.class);
+		
+		//Aqui empiezo a construir mi SQL
+		Root<Guardia>myTabla=myQuery.from(Guardia.class);
+		
+		//where
+		Predicate p1=myCriteria.equal(myTabla.get("apellido"),apellido);
+		
+		//conformacion del select, se pueden crear mas predicados
+		myQuery.select(myTabla).where(p1);
+		
+		
+		TypedQuery<Guardia> typedQuery=this.entityManager.createQuery(myQuery);
+		
+		return typedQuery.getSingleResult();
+	}
+
+	@Override
+	public Guardia buscarGuardiaApellidoCriteriaAnd(String apellido, String nombre) {
+		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Guardia> myQuery=myCriteria.createQuery(Guardia.class);
+		
+		//Aqui empiezo a construir mi SQL
+		Root<Guardia>myTabla=myQuery.from(Guardia.class);
+		
+		//where
+		Predicate p1=myCriteria.equal(myTabla.get("apellido"),apellido);
+		Predicate p2=myCriteria.equal(myTabla.get("nombre"),nombre);
+		Predicate and=myCriteria.and(p1,p2);
+		
+		//conformacion del select, se pueden crear mas predicados
+		myQuery.select(myTabla).where(and);
+		
+		
+		TypedQuery<Guardia> typedQuery=this.entityManager.createQuery(myQuery);
+		
+		return typedQuery.getSingleResult();
+	}
+
+	@Override
+	public List <Guardia> buscarGuardiaApellidoCriteriaOr(String apellido, String nombre) {
+		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Guardia> myQuery=myCriteria.createQuery(Guardia.class);
+		
+		//Aqui empiezo a construir mi SQL
+		Root<Guardia>myTabla=myQuery.from(Guardia.class);
+		
+		//where
+		Predicate p1=myCriteria.equal(myTabla.get("apellido"),apellido);
+		Predicate p2=myCriteria.equal(myTabla.get("nombre"),nombre);
+		Predicate or=myCriteria.or(p1,p2);
+		
+		//conformacion del select, se pueden crear mas predicados
+		myQuery.select(myTabla).where(or);
+		
+		
+		TypedQuery<Guardia> typedQuery=this.entityManager.createQuery(myQuery);
+		
+		return typedQuery.getResultList();
+	}
+
+	
 
 	
 }

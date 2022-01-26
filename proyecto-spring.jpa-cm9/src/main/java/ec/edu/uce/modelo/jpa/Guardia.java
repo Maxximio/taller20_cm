@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -15,6 +16,7 @@ import org.hibernate.annotations.NamedQueries;
 @NamedQuery(name="Guardia.buscarPorApellido",query="select g from Guardia g where g.apellido=:valor")
 //@NamedQueries para mas de un query
 @Table(name="guardia")//Es absolutamente necesario cuando la tabla tiene un nombre diferente
+@NamedNativeQuery(name="Guardia.buscarPorApellidoNative",query="select * from guardia g where g.apellido=:valor",resultClass=Guardia.class)
 public class Guardia {
 	
 	@Id

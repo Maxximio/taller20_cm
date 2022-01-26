@@ -1,5 +1,7 @@
 package ec.edu.uce;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,8 +94,27 @@ public class Application implements CommandLineRunner{
 		//LOG.info("El guardia ha sido: "+gApellido);
 		
 		//busca con native query
-		Guardia gApellido =this.guardService.buscarGuardiaApellidoNamedService("Alvarado");
+		//Guardia gApellido =this.guardService.buscarGuardiaApellidoNamedService("Alvarado");
+		//LOG.info("El guardia ha sido: "+gApellido);
+		
+		//buscar con named native
+		//Guardia gApellido =this.guardService.buscarGuardiaApellidoNamedNativeService("Alvarado");
+		//LOG.info("El guardia ha sido: "+gApellido);
+		
+		//buscar con criteria
+		Guardia gApellido =this.guardService.buscarGuardiaApellidoCriteriaService("Alvarado");
 		LOG.info("El guardia ha sido: "+gApellido);
+		
+		//buscar con criteria and
+		Guardia gApellido1 =this.guardService.buscarGuardiaApellidoCriteriaAndService("Alvarado","Carlos");
+		LOG.info("El guardia ha sido: "+gApellido1);
+				
+		//buscar con criteria or
+		List <Guardia> gApellido2 =this.guardService.buscarGuardiaApellidoCriteriaOrService("Alvarado","Ricardo");
+		for(Guardia g: gApellido2) {
+			LOG.info("El guardia ha sido: "+g);
+		}
+		
 	}
 
 }
