@@ -18,8 +18,10 @@ import ec.edu.uce.modelo.Receta;
 import ec.edu.uce.modelo.jpa.Abogado;
 import ec.edu.uce.modelo.jpa.Arquitecto;
 import ec.edu.uce.modelo.jpa.Chofer;
+import ec.edu.uce.modelo.jpa.Ciudadano;
 import ec.edu.uce.modelo.jpa.DetalleFactura;
 import ec.edu.uce.modelo.jpa.Doctor;
+import ec.edu.uce.modelo.jpa.Empleado;
 import ec.edu.uce.modelo.jpa.Factura;
 import ec.edu.uce.modelo.jpa.Guardia;
 import ec.edu.uce.modelo.jpa.Mesero;
@@ -27,6 +29,7 @@ import ec.edu.uce.repository.jpa.GuardiaRepoImpl;
 import ec.edu.uce.service.IAbogadoService;
 import ec.edu.uce.service.IArquitectoSerivce;
 import ec.edu.uce.service.IChoferService;
+import ec.edu.uce.service.ICiudadanoService;
 import ec.edu.uce.service.IDoctorService;
 import ec.edu.uce.service.IFacturaService;
 import ec.edu.uce.service.IGestorCitaService;
@@ -48,6 +51,8 @@ public class Application implements CommandLineRunner{
 	@Autowired
 	private IFacturaService facService;
 	
+	@Autowired
+	private ICiudadanoService ciuService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -56,7 +61,20 @@ public class Application implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		
-		Factura miFactura=new Factura();
+		Ciudadano ciu=new Ciudadano();
+		ciu.setNombre("Carlos");
+		ciu.setApellido("Montalvo");
+		
+		Empleado empl =new Empleado();
+		empl.setIess("asfqwe2342");
+		empl.setSalario(new BigDecimal(500.30));
+
+		empl.setCiudadania(ciu);
+		ciu.setEmpleados(empl);
+		
+		ciuService.insertarCiudadanoService(ciu);
+		
+		/*Factura miFactura=new Factura();
 		miFactura.setCedula("124534745");
 		LocalDateTime miFecha=LocalDateTime.of(1999, Month.AUGUST,8,12,45);
 		
@@ -82,7 +100,7 @@ public class Application implements CommandLineRunner{
 		
 		miFactura.setDetalles(detalles);
 		
-		this.facService.insertarFacturaService(miFactura);
+		this.facService.insertarFacturaService(miFactura);*/
 		
 
 		//Guardia guard =new Guardia();
