@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.NamedQueries;
+
 
 @Entity
 @NamedQuery(name="Guardia.buscarPorApellido",query="select g from Guardia g where g.apellido=:valor")

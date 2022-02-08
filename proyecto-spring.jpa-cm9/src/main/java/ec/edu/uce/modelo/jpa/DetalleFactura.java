@@ -64,8 +64,14 @@ public class DetalleFactura {
 	public void setFactura(Factura factura) {
 		this.factura = factura;
 	}
-	
+
 	//to string
+	@Override
+	public String toString() {
+		return "DetalleFactura [id=" + id + ", cantidad=" + cantidad + ", precio=" + precio + "]";
+	}
+	
+	
 	
 	
 }

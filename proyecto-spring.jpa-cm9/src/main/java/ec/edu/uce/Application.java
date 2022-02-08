@@ -60,8 +60,49 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		Factura miFactura=new Factura();
+		miFactura.setCedula("124534745");
+		LocalDateTime miFecha=LocalDateTime.of(1999, Month.AUGUST,8,12,45);
 		
-		Ciudadano ciu=new Ciudadano();
+		miFactura.setFecha(miFecha);
+		miFactura.setNumero("123124-124-1212");
+		
+		//contruimos la lista 
+		List<DetalleFactura> detalles=new ArrayList<>();
+		
+		DetalleFactura d1=new DetalleFactura();
+		d1.setCantidad(5);
+		d1.setPrecio(new BigDecimal(14.25));
+		d1.setFactura(miFactura);
+		
+		detalles.add(d1);
+		
+		DetalleFactura d2=new DetalleFactura();
+		d2.setCantidad(1);
+		d2.setPrecio(new BigDecimal(3.5));
+		d2.setFactura(miFactura);	
+		
+		detalles.add(d2);
+		
+		miFactura.setDetalles(detalles);
+		
+		//this.facService.insertarFacturaService(miFactura);
+		//this.facService.buscarPorFechaJOINRigth(miFecha);
+		
+		/*List <Factura> listaF =this.facService.buscarPorFechaJOINLeftService(miFecha);
+		LOG.info("Longitud"+listaF.size());
+		for(Factura factu: listaF) {
+			LOG.info("Las Facturas han sido: "+factu.toString());
+		}*/
+		
+		List <Factura> listaF1 =this.facService.buscarPorFechaWhereService(miFecha);
+		LOG.info("Longitud"+listaF1.size());
+		for(Factura factu1: listaF1) {
+			LOG.info("Las Facturas han sido: "+factu1.toString());
+		}
+		
+		
+		/*Ciudadano ciu=new Ciudadano();
 		ciu.setNombre("Carlos");
 		ciu.setApellido("Montalvo");
 		
@@ -72,7 +113,7 @@ public class Application implements CommandLineRunner{
 		empl.setCiudadania(ciu);
 		ciu.setEmpleados(empl);
 		
-		ciuService.insertarCiudadanoService(ciu);
+		ciuService.insertarCiudadanoService(ciu);*/
 		
 		/*Factura miFactura=new Factura();
 		miFactura.setCedula("124534745");
