@@ -19,10 +19,12 @@ import ec.edu.uce.modelo.jpa.Abogado;
 import ec.edu.uce.modelo.jpa.Arquitecto;
 import ec.edu.uce.modelo.jpa.Chofer;
 import ec.edu.uce.modelo.jpa.Ciudadano;
+import ec.edu.uce.modelo.jpa.Cliente;
 import ec.edu.uce.modelo.jpa.DetalleFactura;
 import ec.edu.uce.modelo.jpa.Doctor;
 import ec.edu.uce.modelo.jpa.Empleado;
 import ec.edu.uce.modelo.jpa.Factura;
+import ec.edu.uce.modelo.jpa.FacturaSencilla;
 import ec.edu.uce.modelo.jpa.Guardia;
 import ec.edu.uce.modelo.jpa.Mesero;
 import ec.edu.uce.repository.jpa.GuardiaRepoImpl;
@@ -30,6 +32,7 @@ import ec.edu.uce.service.IAbogadoService;
 import ec.edu.uce.service.IArquitectoSerivce;
 import ec.edu.uce.service.IChoferService;
 import ec.edu.uce.service.ICiudadanoService;
+import ec.edu.uce.service.IDetalleService;
 import ec.edu.uce.service.IDoctorService;
 import ec.edu.uce.service.IFacturaService;
 import ec.edu.uce.service.IGestorCitaService;
@@ -52,6 +55,9 @@ public class Application implements CommandLineRunner{
 	private IFacturaService facService;
 	
 	@Autowired
+	private IDetalleService detaService;
+	
+	@Autowired
 	private ICiudadanoService ciuService;
 	
 	public static void main(String[] args) {
@@ -60,6 +66,24 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+////////////////////////taller 27///////////////////
+		/*Cliente cli=new Cliente();
+		cli.setNombre("Luisa");
+		
+		List<String>listaT=new ArrayList<>();
+		listaT.add("5232343");
+		listaT.add("6343434");
+		
+		LocalDateTime miFecha=LocalDateTime.of(1999, Month.AUGUST,8,12,45);
+		
+		List <FacturaSencilla> listaF =this.facService.buscarSencillaPorFechaJOINFetchService(miFecha);
+		LOG.info("Longitud"+listaF.size());
+		for(FacturaSencilla factu: listaF) {
+			LOG.info("Las Facturas han sido: "+factu.toString());
+		}*/
+		
+		
+////////////////////////taller 26///////////////////
 		Factura miFactura=new Factura();
 		miFactura.setCedula("124534745");
 		LocalDateTime miFecha=LocalDateTime.of(1999, Month.AUGUST,8,12,45);
@@ -86,6 +110,12 @@ public class Application implements CommandLineRunner{
 		
 		miFactura.setDetalles(detalles);
 		
+		List <Factura> listaF =this.facService.buscarPorFechaJOINFetchService(miFecha);
+		LOG.info("Longitud"+listaF.size());
+		for(Factura factu: listaF) {
+			LOG.info("Las Facturas han sido: "+factu.toString());
+		}
+		
 		//this.facService.insertarFacturaService(miFactura);
 		//this.facService.buscarPorFechaJOINRigth(miFecha);
 		
@@ -95,11 +125,11 @@ public class Application implements CommandLineRunner{
 			LOG.info("Las Facturas han sido: "+factu.toString());
 		}*/
 		
-		List <Factura> listaF1 =this.facService.buscarPorFechaWhereService(miFecha);
+		/*List <Factura> listaF1 =this.facService.buscarPorFechaJOINFetchService(miFecha);
 		LOG.info("Longitud"+listaF1.size());
 		for(Factura factu1: listaF1) {
 			LOG.info("Las Facturas han sido: "+factu1.toString());
-		}
+		}*/
 		
 		
 		/*Ciudadano ciu=new Ciudadano();

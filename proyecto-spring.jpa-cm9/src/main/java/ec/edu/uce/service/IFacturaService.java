@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import ec.edu.uce.modelo.jpa.Factura;
+import ec.edu.uce.modelo.jpa.FacturaSencilla;
 
 public interface IFacturaService {
 
@@ -16,5 +17,9 @@ public interface IFacturaService {
 	List <Factura> buscarPorFechaJOINRigthService(LocalDateTime fecha);
 	
 	List <Factura> buscarPorFechaWhereService(LocalDateTime fecha);
+	
+	List <Factura> buscarPorFechaJOINFetchService(LocalDateTime fecha);
+	
+	List <FacturaSencilla> buscarSencillaPorFechaJOINFetchService(LocalDateTime fecha);
 	
 }
