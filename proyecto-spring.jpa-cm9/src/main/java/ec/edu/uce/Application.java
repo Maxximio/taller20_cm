@@ -15,30 +15,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import ec.edu.uce.modelo.Paciente;
 import ec.edu.uce.modelo.Receta;
-import ec.edu.uce.modelo.jpa.Abogado;
-import ec.edu.uce.modelo.jpa.Arquitecto;
-import ec.edu.uce.modelo.jpa.Chofer;
+import ec.edu.uce.modelo.Turista;
 import ec.edu.uce.modelo.jpa.Ciudadano;
 import ec.edu.uce.modelo.jpa.Cliente;
 import ec.edu.uce.modelo.jpa.DetalleFactura;
-import ec.edu.uce.modelo.jpa.Doctor;
 import ec.edu.uce.modelo.jpa.Empleado;
 import ec.edu.uce.modelo.jpa.Factura;
 import ec.edu.uce.modelo.jpa.FacturaSencilla;
 import ec.edu.uce.modelo.jpa.Guardia;
-import ec.edu.uce.modelo.jpa.Mesero;
 import ec.edu.uce.repository.jpa.GuardiaRepoImpl;
-import ec.edu.uce.service.IAbogadoService;
-import ec.edu.uce.service.IArquitectoSerivce;
-import ec.edu.uce.service.IChoferService;
 import ec.edu.uce.service.ICiudadanoService;
 import ec.edu.uce.service.IDetalleService;
-import ec.edu.uce.service.IDoctorService;
 import ec.edu.uce.service.IFacturaService;
 import ec.edu.uce.service.IGestorCitaService;
 import ec.edu.uce.service.IGuardiaService;
-import ec.edu.uce.service.IMeseroService;
 import ec.edu.uce.service.IPacienteService;
+import ec.edu.uce.service.ITuristaService;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner{
@@ -60,14 +52,26 @@ public class Application implements CommandLineRunner{
 	@Autowired
 	private ICiudadanoService ciuService;
 	
+	@Autowired
+	private ITuristaService turService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 	@Override
 	public void run(String... args) throws Exception {
 		
+/////////////////////taller 28/////////////////////////
+		Turista tur1=new Turista();
+		tur1.setNombre("Sebastian");
+		tur1.setValor(new BigDecimal(200.00));
+		tur1.setAbono(new BigDecimal(100.00));
+		
+		turService.insertarTuristasService(tur1);
+		LOG.info(turService.obtenerTuristas());
+		
 ////////////////////////taller 27///////////////////
-		/*Cliente cli=new Cliente();
+	/*	Cliente cli=new Cliente();
 		cli.setNombre("Luisa");
 		
 		List<String>listaT=new ArrayList<>();
@@ -80,11 +84,11 @@ public class Application implements CommandLineRunner{
 		LOG.info("Longitud"+listaF.size());
 		for(FacturaSencilla factu: listaF) {
 			LOG.info("Las Facturas han sido: "+factu.toString());
-		}*/
-		
+		}
+		*/
 		
 ////////////////////////taller 26///////////////////
-		Factura miFactura=new Factura();
+		/*Factura miFactura=new Factura();
 		miFactura.setCedula("124534745");
 		LocalDateTime miFecha=LocalDateTime.of(1999, Month.AUGUST,8,12,45);
 		
@@ -114,7 +118,7 @@ public class Application implements CommandLineRunner{
 		LOG.info("Longitud"+listaF.size());
 		for(Factura factu: listaF) {
 			LOG.info("Las Facturas han sido: "+factu.toString());
-		}
+		}*/
 		
 		//this.facService.insertarFacturaService(miFactura);
 		//this.facService.buscarPorFechaJOINRigth(miFecha);
