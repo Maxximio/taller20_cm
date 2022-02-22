@@ -18,6 +18,7 @@ import ec.edu.uce.modelo.Receta;
 import ec.edu.uce.modelo.Turista;
 import ec.edu.uce.modelo.jpa.Ciudadano;
 import ec.edu.uce.modelo.jpa.Cliente;
+import ec.edu.uce.modelo.jpa.CuentaBancaria;
 import ec.edu.uce.modelo.jpa.DetalleFactura;
 import ec.edu.uce.modelo.jpa.Empleado;
 import ec.edu.uce.modelo.jpa.Factura;
@@ -25,6 +26,7 @@ import ec.edu.uce.modelo.jpa.FacturaSencilla;
 import ec.edu.uce.modelo.jpa.Guardia;
 import ec.edu.uce.repository.jpa.GuardiaRepoImpl;
 import ec.edu.uce.service.ICiudadanoService;
+import ec.edu.uce.service.ICuentaBancariaService;
 import ec.edu.uce.service.IDetalleService;
 import ec.edu.uce.service.IFacturaService;
 import ec.edu.uce.service.IGestorCitaService;
@@ -53,7 +55,7 @@ public class Application implements CommandLineRunner{
 	private ICiudadanoService ciuService;
 	
 	@Autowired
-	private ITuristaService turService;
+	private ICuentaBancariaService cubaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -61,14 +63,30 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		CuentaBancaria c1=new CuentaBancaria();
+		c1.setNumero("2145234523141");
+		c1.setClienteCedula("0123124");
+		c1.setSaldo(new BigDecimal(100.00));
+		c1.setTipo("corriente");
+		
+		CuentaBancaria c2=new CuentaBancaria();
+		c2.setNumero("124141213124");
+		c2.setClienteCedula("012313124");
+		c2.setSaldo(new BigDecimal(200.00));
+		c2.setTipo("ahorros");
+		
+		cubaService.InsertarCuentaBancariaService(c1);
+		cubaService.InsertarCuentaBancariaService(c2);
+		
+		
 /////////////////////taller 28/////////////////////////
-		Turista tur1=new Turista();
+		/*Turista tur1=new Turista();
 		tur1.setNombre("Sebastian");
 		tur1.setValor(new BigDecimal(200.00));
 		tur1.setAbono(new BigDecimal(100.00));
 		
 		turService.insertarTuristasService(tur1);
-		LOG.info(turService.obtenerTuristas());
+		LOG.info(turService.obtenerTuristas());*/
 		
 ////////////////////////taller 27///////////////////
 	/*	Cliente cli=new Cliente();
