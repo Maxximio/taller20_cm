@@ -24,6 +24,7 @@ import ec.edu.uce.modelo.jpa.Empleado;
 import ec.edu.uce.modelo.jpa.Factura;
 import ec.edu.uce.modelo.jpa.FacturaSencilla;
 import ec.edu.uce.modelo.jpa.Guardia;
+import ec.edu.uce.modelo.jpa.TarjetaCredito;
 import ec.edu.uce.repository.jpa.GuardiaRepoImpl;
 import ec.edu.uce.service.ICiudadanoService;
 import ec.edu.uce.service.ICuentaBancariaService;
@@ -32,6 +33,7 @@ import ec.edu.uce.service.IFacturaService;
 import ec.edu.uce.service.IGestorCitaService;
 import ec.edu.uce.service.IGuardiaService;
 import ec.edu.uce.service.IPacienteService;
+import ec.edu.uce.service.ITarjetaService;
 import ec.edu.uce.service.ITuristaService;
 
 @SpringBootApplication
@@ -40,30 +42,25 @@ public class Application implements CommandLineRunner{
 	private static final Logger LOG= LogManager.getLogger(GuardiaRepoImpl.class);
 	
 	@Autowired
-	private IGestorCitaService gestorServ;
-	
-	@Autowired
-	private IGuardiaService guardService;
-	
-	@Autowired
-	private IFacturaService facService;
-	
-	@Autowired
-	private IDetalleService detaService;
-	
-	@Autowired
-	private ICiudadanoService ciuService;
-	
-	@Autowired
-	private ICuentaBancariaService cubaService;
+	private ITarjetaService tarService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 	@Override
 	public void run(String... args) throws Exception {
+
+		TarjetaCredito tarj1=new TarjetaCredito();
+		tarj1.setNumero("789");
+		tarj1.setCedula("246345775");
+		tarj1.setCupo(new BigDecimal(500.00));
 		
-		CuentaBancaria c1=new CuentaBancaria();
+		//tarService.InsertarTarjeta(tarj1);
+		
+		tarService.CargoTarjeta("789", new BigDecimal(20.00));
+		
+///////////////////////////taller 32///////////////////////////////////////////
+		/*CuentaBancaria c1=new CuentaBancaria();
 		c1.setNumero("2145234523141");
 		c1.setClienteCedula("0123124");
 		c1.setSaldo(new BigDecimal(100.00));
@@ -78,7 +75,7 @@ public class Application implements CommandLineRunner{
 		//cubaService.InsertarCuentaBancariaService(c1);
 		//cubaService.InsertarCuentaBancariaService(c2);
 		
-		cubaService.realizarTransferencia("2145234523141", "124141213124", new BigDecimal(20.00));
+		cubaService.realizarTransferencia("2145234523141", "124141213124", new BigDecimal(20.00));*/
 		
 /////////////////////taller 28/////////////////////////
 		/*Turista tur1=new Turista();
