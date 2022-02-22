@@ -75,9 +75,10 @@ public class Application implements CommandLineRunner{
 		c2.setSaldo(new BigDecimal(200.00));
 		c2.setTipo("ahorros");
 		
-		cubaService.InsertarCuentaBancariaService(c1);
-		cubaService.InsertarCuentaBancariaService(c2);
+		//cubaService.InsertarCuentaBancariaService(c1);
+		//cubaService.InsertarCuentaBancariaService(c2);
 		
+		cubaService.realizarTransferencia("2145234523141", "124141213124", new BigDecimal(20.00));
 		
 /////////////////////taller 28/////////////////////////
 		/*Turista tur1=new Turista();
