@@ -44,23 +44,26 @@ public class Application implements CommandLineRunner{
 	@Autowired
 	private ITarjetaService tarService;
 	
+	@Autowired
+	private ICuentaBancariaService cubaService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 	@Override
 	public void run(String... args) throws Exception {
 
-		TarjetaCredito tarj1=new TarjetaCredito();
+		/*TarjetaCredito tarj1=new TarjetaCredito();
 		tarj1.setNumero("789");
 		tarj1.setCedula("246345775");
 		tarj1.setCupo(new BigDecimal(500.00));
 		
 		//tarService.InsertarTarjeta(tarj1);
 		
-		tarService.CargoTarjeta("789", new BigDecimal(20.00));
+		tarService.CargoTarjeta("789", new BigDecimal(20.00));*/
 		
 ///////////////////////////taller 32///////////////////////////////////////////
-		/*CuentaBancaria c1=new CuentaBancaria();
+		CuentaBancaria c1=new CuentaBancaria();
 		c1.setNumero("2145234523141");
 		c1.setClienteCedula("0123124");
 		c1.setSaldo(new BigDecimal(100.00));
@@ -75,7 +78,7 @@ public class Application implements CommandLineRunner{
 		//cubaService.InsertarCuentaBancariaService(c1);
 		//cubaService.InsertarCuentaBancariaService(c2);
 		
-		cubaService.realizarTransferencia("2145234523141", "124141213124", new BigDecimal(20.00));*/
+		cubaService.realizarTransferencia( "124141213124", "2145234523141", new BigDecimal(20.00));
 		
 /////////////////////taller 28/////////////////////////
 		/*Turista tur1=new Turista();

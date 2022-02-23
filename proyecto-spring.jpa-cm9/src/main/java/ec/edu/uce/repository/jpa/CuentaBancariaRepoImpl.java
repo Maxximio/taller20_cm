@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.CuentaBancaria;
+
 @Repository
 @Transactional
 public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo{
@@ -26,7 +27,7 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo{
 	}
 
 	@Override
-	public void ActualizarCuentaBancaria(CuentaBancaria cuenta) {
+	public void ActualizarCuentaBancaria(CuentaBancaria cuenta){
 		this.entityManager.merge(cuenta);
 	}
 
@@ -35,6 +36,18 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo{
 		Query miQuery= this.entityManager.createNativeQuery("select * from cuenta_bancaria c where c.cuba_numero=:valor",CuentaBancaria.class);
 		miQuery.setParameter("valor", numero);
 		return (CuentaBancaria) miQuery.getSingleResult();
+	}
+
+	@Override
+	public void ActualizarCuentaBancaria2(CuentaBancaria cuenta) {
+		this.entityManager.merge(cuenta);
+		
+		//try {
+			throw new ArrayIndexOutOfBoundsException();
+		//}catch(ArrayIndexOutOfBoundsException e) {
+			//LOG.error("Error");
+		//}
+		
 	}
 
 }

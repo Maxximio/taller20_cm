@@ -8,6 +8,8 @@ public interface ICuentaBancariaRepo {
 	
 	void ActualizarCuentaBancaria(CuentaBancaria cuenta);
 	
+	void ActualizarCuentaBancaria2(CuentaBancaria cuenta);
+	
 	CuentaBancaria BuscarPorNumero(String numero);
 	
 }
