@@ -42,11 +42,11 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo{
 	public void ActualizarCuentaBancaria2(CuentaBancaria cuenta) {
 		this.entityManager.merge(cuenta);
 		
-		//try {
+		try {
 			throw new ArrayIndexOutOfBoundsException();
-		//}catch(ArrayIndexOutOfBoundsException e) {
-			//LOG.error("Error");
-		//}
+		}catch(ArrayIndexOutOfBoundsException e) {
+			LOG.error("Error");
+		}
 		
 	}
 

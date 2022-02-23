@@ -53,11 +53,11 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 		this.cuentaRepo.ActualizarCuentaBancaria(CuentaOrigen);
 		LOG.info("DA1");
 		LOG.info("AA2");
-		try {
+		//try {
 			this.cuentaRepo.ActualizarCuentaBancaria2(CuentaDestino);
-		}catch(ArrayIndexOutOfBoundsException e) {
-			LOG.error("Error");
-		}
+		//}catch(ArrayIndexOutOfBoundsException e) {
+		//	LOG.error("Error");
+		//}
 		
 		LOG.info("DA2");
 		
