@@ -18,7 +18,7 @@ import ec.edu.uce.repository.jpa.ITarjetaRepo;
 @Service
 public class TarjetaServiceImpl implements ITarjetaService{
 
-	private static final Logger LOG= LogManager.getLogger(TarjetaCredito.class);
+	private static final Logger LOG= LogManager.getLogger(TarjetaServiceImpl.class);
 	
 	@Autowired
 	private ITarjetaRepo tarjRepo;
@@ -59,11 +59,11 @@ public class TarjetaServiceImpl implements ITarjetaService{
 		
 		consuRepo.InsertarConsumo(consu);
 		
-		try {
+		//try {
 		tarjRepo.ActualizarTarjeta(Tarjeta);
-		}catch(ArrayIndexOutOfBoundsException e) {
-		LOG.error("Error en Service");
-		}
+		//}catch(ArrayIndexOutOfBoundsException e) {
+		//LOG.error("Error en Service");
+		//}
 	}
 
 }

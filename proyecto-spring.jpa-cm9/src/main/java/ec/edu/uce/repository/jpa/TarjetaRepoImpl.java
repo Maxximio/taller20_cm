@@ -5,6 +5,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.TarjetaCredito;
@@ -13,6 +15,8 @@ import ec.edu.uce.modelo.jpa.TarjetaCredito;
 @Transactional
 public class TarjetaRepoImpl implements ITarjetaRepo{
 
+	private static final Logger LOG= LogManager.getLogger(TarjetaRepoImpl.class);
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -24,7 +28,11 @@ public class TarjetaRepoImpl implements ITarjetaRepo{
 	@Override
 	public void ActualizarTarjeta(TarjetaCredito tarjeta) {
 		this.entityManager.merge(tarjeta);
-		throw new RuntimeException();
+		try {
+			throw new RuntimeException();
+			}catch(ArrayIndexOutOfBoundsException e) {
+				LOG.error("Error en Repo");
+			}
 	}
 
 	@Override
