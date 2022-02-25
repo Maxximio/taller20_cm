@@ -30,7 +30,7 @@ public class TarjetaRepoImpl implements ITarjetaRepo{
 		this.entityManager.merge(tarjeta);
 		try {
 			throw new RuntimeException();
-			}catch(ArrayIndexOutOfBoundsException e) {
+			}catch(RuntimeException e) {
 				LOG.error("Error en Repo");
 			}
 	}
