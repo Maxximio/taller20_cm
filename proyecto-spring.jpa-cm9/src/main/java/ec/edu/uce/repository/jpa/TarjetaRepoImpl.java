@@ -24,6 +24,7 @@ public class TarjetaRepoImpl implements ITarjetaRepo{
 	@Override
 	public void ActualizarTarjeta(TarjetaCredito tarjeta) {
 		this.entityManager.merge(tarjeta);
+		throw new RuntimeException();
 	}
 
 	@Override

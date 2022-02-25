@@ -3,6 +3,10 @@ package ec.edu.uce.service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.transaction.Transactional;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,8 @@ import ec.edu.uce.repository.jpa.ITarjetaRepo;
 @Service
 public class TarjetaServiceImpl implements ITarjetaService{
 
+	private static final Logger LOG= LogManager.getLogger(TarjetaCredito.class);
+	
 	@Autowired
 	private ITarjetaRepo tarjRepo;
 	
@@ -36,6 +42,7 @@ public class TarjetaServiceImpl implements ITarjetaService{
 	}
 
 	@Override
+	@Transactional
 	public void CargoTarjeta(String numero, BigDecimal valorRetirar) {
 		
 		TarjetaCredito Tarjeta=this.tarjRepo.BuscarNumero(numero);
@@ -51,8 +58,12 @@ public class TarjetaServiceImpl implements ITarjetaService{
 		consu.setTarjeta_credito(Tarjeta);
 		
 		consuRepo.InsertarConsumo(consu);
-		tarjRepo.ActualizarTarjeta(Tarjeta);
 		
+		try {
+		tarjRepo.ActualizarTarjeta(Tarjeta);
+		}catch(ArrayIndexOutOfBoundsException e) {
+		LOG.error("Error en Service");
+		}
 	}
 
 }
