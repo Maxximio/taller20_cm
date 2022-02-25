@@ -59,11 +59,11 @@ public class TarjetaServiceImpl implements ITarjetaService{
 		
 		consuRepo.InsertarConsumo(consu);
 		
-		//try {
+		try {
 		tarjRepo.ActualizarTarjeta(Tarjeta);
-		//}catch(ArrayIndexOutOfBoundsException e) {
-		//LOG.error("Error en Service");
-		//}
+		}catch(RuntimeException e) {
+		LOG.error("Error en Service");
+		}
 	}
 
 }

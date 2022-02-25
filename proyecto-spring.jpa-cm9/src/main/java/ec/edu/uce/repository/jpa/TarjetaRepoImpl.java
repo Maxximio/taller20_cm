@@ -28,11 +28,11 @@ public class TarjetaRepoImpl implements ITarjetaRepo{
 	@Override
 	public void ActualizarTarjeta(TarjetaCredito tarjeta) {
 		this.entityManager.merge(tarjeta);
-		try {
+		//try {
 			throw new RuntimeException();
-			}catch(RuntimeException e) {
-				LOG.error("Error en Repo");
-			}
+			//}catch(RuntimeException e) {
+			//	LOG.error("Error en Repo");
+			//}
 	}
 
 	@Override
