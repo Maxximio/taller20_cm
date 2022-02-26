@@ -37,7 +37,8 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 	}
 
 	@Override
-	@Transactional//todo lo de aqui abajo se considera una transaccion
+	@Transactional()
+	//todo lo de aqui abajo se considera una transaccion
 	public void realizarTransferencia(String origen, String destino, BigDecimal valorTransferir) {
 		
 		CuentaBancaria CuentaOrigen= this.cuentaRepo.BuscarPorNumero(origen);
@@ -50,14 +51,19 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 		BigDecimal Transferenci2 =CuentaDestino.getSaldo().add(valorTransferir);
 		CuentaDestino.setSaldo(Transferenci2);
 		LOG.info("AA1");
-		this.cuentaRepo.ActualizarCuentaBancaria(CuentaOrigen);
+		try {
+			this.cuentaRepo.ActualizarCuentaBancaria(CuentaOrigen);
+		}catch(ArrayIndexOutOfBoundsException e) {
+			LOG.error("Error");
+		}
+		
 		LOG.info("DA1");
 		LOG.info("AA2");
-		//try {
+		try {
 			this.cuentaRepo.ActualizarCuentaBancaria2(CuentaDestino);
-		//}catch(ArrayIndexOutOfBoundsException e) {
-		//	LOG.error("Error");
-		//}
+		}catch(ArrayIndexOutOfBoundsException e) {
+			LOG.error("Error");
+		}
 		
 		LOG.info("DA2");
 		
