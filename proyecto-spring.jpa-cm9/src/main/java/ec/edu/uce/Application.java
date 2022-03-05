@@ -78,7 +78,11 @@ public class Application implements CommandLineRunner{
 		//cubaService.InsertarCuentaBancariaService(c1);
 		//cubaService.InsertarCuentaBancariaService(c2);
 		
-		cubaService.realizarTransferencia( "124141213124", "2145234523141", new BigDecimal(20.00));
+		cubaService.realizarTransferenciaExpressInicial( "124141213124", "2145234523141", new BigDecimal(20.00));
+		//cubaService.realizarTransferenciaExpressInicialNoT( "124141213124", "2145234523141", new BigDecimal(20.00));
+		//cubaService.enviarMail();
+		//cubaService.enviarMailNoT();
+		//cubaService.propagaciónMandatory();
 		
 /////////////////////taller 28/////////////////////////
 		/*Turista tur1=new Turista();
