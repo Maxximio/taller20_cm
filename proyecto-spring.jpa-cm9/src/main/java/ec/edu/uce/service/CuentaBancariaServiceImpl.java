@@ -2,13 +2,15 @@ package ec.edu.uce.service;
 
 import java.math.BigDecimal;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import javax.transaction.Transactional.TxType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import ec.edu.uce.modelo.jpa.CuentaBancaria;
 import ec.edu.uce.repository.jpa.GuardiaRepoImpl;
@@ -33,7 +35,7 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 	}
 
 	@Override
-	@Transactional(value = TxType.NOT_SUPPORTED)
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public CuentaBancaria BuscarPorNumeroService(String numero) {
 		return this.cuentaRepo.BuscarPorNumero(numero);
 	}
@@ -88,9 +90,12 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 	
 	@Override
 	//@Transactional(value = TxType.SUPPORTS)
-	@Transactional(value = TxType.REQUIRES_NEW)
+	//@Transactional(value = TxType.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void realizarTransferenciaExpress(String origen, String destino, BigDecimal valorTransferir) {
 		LOG.info("Ejecucion Suports");
+		LOG.info("prueba 2"+TransactionSynchronizationManager.isActualTransactionActive());
+
 		CuentaBancaria CuentaOrigen= this.cuentaRepo.BuscarPorNumero(origen);	
 		CuentaBancaria CuentaDestino=this.cuentaRepo.BuscarPorNumero(destino);
 		
@@ -116,12 +121,12 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 		this.cuentaRepo.enviarMail("Correo de Clases");
 	}
 	
-	@Transactional(value = TxType.SUPPORTS) 
+	@Transactional(propagation=Propagation.SUPPORTS) 
 	public void propagaciónSupport() {
 		
 	}
 	
-	@Transactional(value = TxType.MANDATORY) 
+	@Transactional(propagation=Propagation.MANDATORY) 
 	public void propagaciónMandatory() {
 		LOG.info("Ejecucion Mandatory");
 	}

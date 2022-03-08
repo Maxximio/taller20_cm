@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +15,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.uce.interfaces.funcionales.IPersonaFunction;
+import ec.edu.uce.interfaces.funcionales.IPersonaUnaryOperator;
 import ec.edu.uce.modelo.Paciente;
 import ec.edu.uce.modelo.Receta;
 import ec.edu.uce.modelo.Turista;
@@ -26,6 +30,7 @@ import ec.edu.uce.modelo.jpa.FacturaSencilla;
 import ec.edu.uce.modelo.jpa.Guardia;
 import ec.edu.uce.modelo.jpa.TarjetaCredito;
 import ec.edu.uce.repository.jpa.GuardiaRepoImpl;
+import ec.edu.uce.service.CuentaBancariaFachadaService;
 import ec.edu.uce.service.ICiudadanoService;
 import ec.edu.uce.service.ICuentaBancariaService;
 import ec.edu.uce.service.IDetalleService;
@@ -45,14 +50,36 @@ public class Application implements CommandLineRunner{
 	private ITarjetaService tarService;
 	
 	@Autowired
-	private ICuentaBancariaService cubaService;
+	private CuentaBancariaFachadaService cubaService;
+	
+	@Autowired ICuentaBancariaService cubaService1;
+	
+
+	
+	private IPersonaUnaryOperator<String> personaUnary;
+	
+	public IPersonaFunction<String,String> personaF;
+	
+	public Function<String, String> funcion1;
+	
+	public UnaryOperator<String> funcionUnary;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 	@Override
 	public void run(String... args) throws Exception {
-/*
+
+		//Taller 36
+		
+		//String prueba =this.personaUnary.apply("A");
+		
+		//String prueba1=this.personaF.apply("C");
+		
+		this.cubaService.realizarTransferenciaExpressInicialNoT("124141213124", "2145234523141", new BigDecimal(20.00));
+		
+		
+		/*
 		TarjetaCredito tarj1=new TarjetaCredito();
 		tarj1.setNumero("789");
 		tarj1.setCedula("246345775");
@@ -63,7 +90,7 @@ public class Application implements CommandLineRunner{
 		tarService.CargoTarjeta("789", new BigDecimal(10.00));
 		*/
 ///////////////////////////taller 32///////////////////////////////////////////
-		CuentaBancaria c1=new CuentaBancaria();
+		/*CuentaBancaria c1=new CuentaBancaria();
 		c1.setNumero("2145234523141");
 		c1.setClienteCedula("0123124");
 		c1.setSaldo(new BigDecimal(100.00));
@@ -73,12 +100,12 @@ public class Application implements CommandLineRunner{
 		c2.setNumero("124141213124");
 		c2.setClienteCedula("012313124");
 		c2.setSaldo(new BigDecimal(200.00));
-		c2.setTipo("ahorros");
+		c2.setTipo("ahorros");*/
 		
 		//cubaService.InsertarCuentaBancariaService(c1);
 		//cubaService.InsertarCuentaBancariaService(c2);
 		
-		cubaService.realizarTransferenciaExpressInicial( "124141213124", "2145234523141", new BigDecimal(20.00));
+		//cubaService.realizarTransferenciaExpressInicial( "124141213124", "2145234523141", new BigDecimal(20.00));
 		//cubaService.realizarTransferenciaExpressInicialNoT( "124141213124", "2145234523141", new BigDecimal(20.00));
 		//cubaService.enviarMail();
 		//cubaService.enviarMailNoT();
