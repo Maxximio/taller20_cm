@@ -12,7 +12,7 @@ public class MainFuncional {
 		
 		//SUPPLIER
 		System.out.println("--------SUPPLIER---------");
-		IPersonaSupplier<String> supplier =new PersonaSupplier();
+		IPersonaSupplier<String> supplier =new PersonaSupplierImpl();
 		System.out.println(supplier.get());
 		
 		IPersonaSupplier<String> supplierChino =new PersonaSupplierChino();
